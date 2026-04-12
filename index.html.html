@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Playbook Comercial — Gap Selling</title>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151820;
+    --surface2: #1c2030;
+    --border: #252a3a;
+    --accent: #4f7cff;
+    --accent2: #7c5cfc;
+    --accent3: #00c9a7;
+    --accent4: #ff6b6b;
+    --accent5: #ffa94d;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --tag-bg: rgba(79,124,255,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #151828 60%, #1a1040 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(79,124,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #fff 30%, #7c9fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 620px;
+  }
+  .header-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .badge {
+    background: var(--tag-bg);
+    border: 1px solid rgba(79,124,255,0.2);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+  .badge.green  { background: rgba(0,201,167,0.1); border-color: rgba(0,201,167,0.25); color: var(--accent3); }
+  .badge.purple { background: rgba(124,92,252,0.1); border-color: rgba(124,92,252,0.25); color: var(--accent2); }
+  .badge.orange { background: rgba(255,169,77,0.1); border-color: rgba(255,169,77,0.25); color: var(--accent5); }
+  .badge.red    { background: rgba(255,107,107,0.1); border-color: rgba(255,107,107,0.25); color: var(--accent4); }
+
+  /* ── NAV TABS ── */
+  nav {
+    background: rgba(13,15,20,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-pill-track {
+    display: flex;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 5px;
+    gap: 2px;
+    position: relative;
+  }
+  .nav-pill-indicator {
+    position: absolute;
+    top: 5px;
+    height: calc(100% - 10px);
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    transition: left 0.35s cubic-bezier(0.4,0,0.2,1), width 0.35s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 2px 16px rgba(79,124,255,0.35);
+    z-index: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: #fff; }
+  .tab-btn .tab-icon {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+  }
+  .tab-btn.active .tab-icon { opacity: 1; }
+  .tab-btn .tab-label { font-size: 13px; }
+  .tab-btn .tab-step {
+    font-size: 10px;
+    font-weight: 700;
+    opacity: 0.6;
+    letter-spacing: 1px;
+  }
+  .tab-btn.active .tab-step { opacity: 0.8; }
+
+  /* ── MAIN CONTENT ── */
+  main { max-width: 1100px; margin: 0 auto; padding: 40px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION TITLES ── */
+  .section-hero {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 36px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .section-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+  .panel-abertura  .section-hero::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .panel-investigacao .section-hero::before { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
+  .panel-fechamento .section-hero::before { background: linear-gradient(90deg, var(--accent2), var(--accent4)); }
+  .panel-followup   .section-hero::before { background: linear-gradient(90deg, var(--accent5), var(--accent3)); }
+
+  .section-hero .module-tag {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .section-hero h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+  .section-hero p { color: var(--muted); max-width: 700px; font-size: 14px; }
+  .principle-box {
+    background: rgba(79,124,255,0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-size: 14px;
+    color: #b0badf;
+    font-style: italic;
+  }
+
+  /* ── GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+  @media (max-width: 768px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    main { padding: 20px; }
+    nav { padding: 0 16px; overflow-x: auto; }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card h3 .icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .card h3 .icon.blue   { background: rgba(79,124,255,0.15); }
+  .card h3 .icon.green  { background: rgba(0,201,167,0.15); }
+  .card h3 .icon.purple { background: rgba(124,92,252,0.15); }
+  .card h3 .icon.orange { background: rgba(255,169,77,0.15); }
+  .card h3 .icon.red    { background: rgba(255,107,107,0.15); }
+  .card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 20px 0 8px;
+  }
+  .card h4:first-child { margin-top: 0; }
+  .card p { font-size: 14px; color: #b0badf; margin-bottom: 8px; }
+  .card ul { padding-left: 18px; }
+  .card ul li { font-size: 14px; color: #b0badf; margin-bottom: 5px; }
+  .card ul li strong { color: var(--text); }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: #0a0c12;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #c9d1f0;
+    margin: 12px 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .code-block .hl { color: #7dd3fc; }
+  .code-block .hl2 { color: #86efac; }
+  .code-block .hl3 { color: #fca5a5; }
+  .code-block .comment { color: var(--muted); font-style: italic; }
+
+  /* ── GAP DIAGRAM ── */
+  .gap-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .gap-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+  .gap-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 28px;
+    flex: 1;
+    max-width: 260px;
+  }
+  .gap-box.current { border-color: rgba(255,107,107,0.4); }
+  .gap-box.future  { border-color: rgba(0,201,167,0.4); }
+  .gap-box .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .gap-box.current .label { color: var(--accent4); }
+  .gap-box.future  .label { color: var(--accent3); }
+  .gap-box .title { font-size: 15px; font-weight: 700; }
+  .gap-box .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+  .gap-arrow {
+    flex: 1;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .gap-arrow .gap-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .gap-arrow .arrow-line {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    width: 100%;
+  }
+  .gap-arrow .line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent4), var(--accent), var(--accent3));
+  }
+  .gap-arrow .arrowhead { color: var(--accent3); font-size: 18px; line-height: 1; }
+  .gap-arrow .gap-desc { font-size: 11px; color: var(--muted); text-align: center; }
+
+  /* ── TABLES ── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+  .data-table th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: #b0badf;
+  }
+  .data-table td:first-child { color: var(--text); font-weight: 600; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* ── CHECKLIST ── */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: #b0badf;
+    padding: 10px 14px;
+    background: var(--surface2);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .checklist li .check-icon {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── MEDDPICC ── */
+  .meddpicc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  @media (max-width: 900px) { .meddpicc-grid { grid-template-columns: repeat(2, 1fr); } }
+  .medd-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .medd-letter {
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .medd-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+  .medd-q { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── OBJECTION CARDS ── */
+  .objection-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .objection-card .obj-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent4);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .objection-card .obj-title::before {
+    content: '✕';
+    background: rgba(255,107,107,0.15);
+    color: var(--accent4);
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .objection-card .obj-response {
+    background: rgba(0,201,167,0.06);
+    border-left: 2px solid var(--accent3);
+    padding: 12px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 13px;
+    color: #b0badf;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    white-space: pre-wrap;
+    line-height: 1.7;
+  }
+
+  /* ── TEMPLATE CARDS ── */
+  .template-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .template-card .t-header {
+    background: var(--surface);
+    padding: 12px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .template-card .t-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .template-card .t-body {
+    padding: 18px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #c0c8e8;
+    white-space: pre-wrap;
+  }
+  .template-card .t-body .subj { color: var(--accent5); font-weight: 700; }
+  .template-card .t-body .placeholder { color: var(--accent3); }
+  .template-card .t-body .emphasis { color: var(--accent4); }
+
+  /* ── STEP LIST ── */
+  .step-list { display: flex; flex-direction: column; gap: 12px; }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; padding-top: 4px; }
+  .step-content strong { display: block; font-size: 14px; margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  /* ── CADENCE TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 16px; top: 20px; bottom: 20px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--accent), var(--accent3));
+    opacity: 0.3;
+  }
+  .tl-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 12px 0;
+  }
+  .tl-dot {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--accent);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .tl-content { flex: 1; padding-top: 6px; }
+  .tl-content strong { font-size: 13px; color: var(--text); }
+  .tl-content p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+  /* ── SIGNAL TABLE ── */
+  .signal-row { display: flex; gap: 12px; margin-bottom: 10px; }
+  .signal-trigger {
+    background: rgba(255,169,77,0.08);
+    border: 1px solid rgba(255,169,77,0.2);
+    color: var(--accent5);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .signal-action {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #b0badf;
+    flex: 2;
+  }
+
+  /* ── ACRA TABLE ── */
+  .acra-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: stretch;
+  }
+  .acra-letter {
+    width: 44px;
+    min-height: 60px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .acra-content {
+    flex: 1;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+  }
+  .acra-content strong { font-size: 13px; display: block; margin-bottom: 4px; }
+  .acra-content p { font-size: 13px; color: var(--muted); margin: 0; }
+
+  /* ── REFERENCES ── */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 768px) { .ref-grid { grid-template-columns: 1fr; } }
+  .ref-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .ref-num {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: var(--tag-bg);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .ref-info strong { display: block; font-size: 13px; margin-bottom: 2px; }
+  .ref-info span { font-size: 12px; color: var(--muted); display: block; margin-bottom: 4px; }
+  .ref-info p { font-size: 12px; color: #7a86a8; margin: 0; }
+
+  /* ── QUOTE BLOCK ── */
+  .quote-block {
+    position: relative;
+    background: linear-gradient(135deg, rgba(79,124,255,0.07) 0%, rgba(124,92,252,0.07) 100%);
+    border: 1px solid rgba(79,124,255,0.18);
+    border-radius: 16px;
+    padding: 28px 32px 24px 52px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .quote-block::before {
+    content: '\201C';
+    position: absolute;
+    top: -4px;
+    left: 16px;
+    font-size: 72px;
+    font-family: Georgia, serif;
+    color: var(--accent);
+    opacity: 0.35;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(124,92,252,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .quote-block p {
+    font-size: 15px;
+    font-style: italic;
+    color: #c8d0f0;
+    line-height: 1.75;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .quote-avatar.blue   { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+  .quote-avatar.green  { background: linear-gradient(135deg, var(--accent3), #0097a7); }
+  .quote-avatar.orange { background: linear-gradient(135deg, var(--accent5), #e65100); }
+  .quote-avatar.red    { background: linear-gradient(135deg, var(--accent4), #b71c1c); }
+  .quote-avatar.purple { background: linear-gradient(135deg, var(--accent2), #311b92); }
+  .quote-meta strong { display: block; font-size: 13px; color: var(--text); }
+  .quote-meta span   { font-size: 11px; color: var(--muted); letter-spacing: 0.3px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════ -->
+<header>
+  <div class="header-eyebrow">Playbook Comercial · Edição 2026</div>
+  <h1>Sales Framework</h1>
+  <p>Baseado nas metodologias mais avançadas de vendas consultivas do mercado norte-americano. Do primeiro contato ao deal fechado.</p>
+  <div class="header-badges">
+    <span class="badge">Gap Selling — Keenan</span>
+    <span class="badge purple">SPIN Selling — Rackham</span>
+    <span class="badge green">Challenger Sale</span>
+    <span class="badge orange">MEDDPICC</span>
+    <span class="badge red">Never Split the Difference</span>
+    <span class="badge purple">Command of the Message</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-pill-track" id="navTrack">
+    <div class="nav-pill-indicator" id="navIndicator"></div>
+    <button class="tab-btn active" id="btn-abertura" onclick="showTab('abertura', this)">
+      <span class="tab-icon"></span>
+      <span class="tab-label">Abertura</span>
+      <span class="tab-step">01</span>
+    </button>
+    <button class="tab-btn" id="btn-investigacao" onclick="showTab('investigacao', this)">
+      <span class="tab-icon"></span>
+      <span class="tab-label">Investigação</span>
+      <span class="tab-step">02</span>
+    </button>
+    <button class="tab-btn" id="btn-fechamento" onclick="showTab('fechamento', this)">
+      <span class="tab-icon"></span>
+      <span class="tab-label">Fechamento</span>
+      <span class="tab-step">03</span>
+    </button>
+    <button class="tab-btn" id="btn-followup" onclick="showTab('followup', this)">
+      <span class="tab-icon"></span>
+      <span class="tab-label">Follow Up</span>
+      <span class="tab-step">04</span>
+    </button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════════
+     MÓDULO 1 — ABERTURA
+══════════════════════════════════════════════ -->
+<div class="tab-panel panel-abertura active" id="tab-abertura">
+
+  <div class="section-hero">
+    <div class="module-tag">Módulo 01</div>
+    <h2>Abertura</h2>
+    <p>O primeiro contato define tudo. Seu trabalho não é apresentar o produto — é criar tensão produtiva e provar que vale o tempo do prospect.</p>
+    <div class="principle-box">
+      "Você não tem um produto para vender. Você tem um problema para resolver. Comece pelo problema, não pela solução." — Keenan, Gap Selling
+    </div>
+  </div>
+
+  <!-- QUOTE — ABERTURA -->
+  <div class="quote-block">
+    <p>"As pessoas não compram porque entendem você. Elas compram porque se sentem compreendidas."</p>
+    <div class="quote-author">
+      <div class="quote-avatar blue">ZZ</div>
+      <div class="quote-meta">
+        <strong>Zig Ziglar</strong>
+        <span>Lenda das Vendas · Autor de "See You at the Top"</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÉ-CALL RESEARCH -->
+  <div class="card">
+    <h3><span class="icon blue">PC</span>PRÉ-CALL RESEARCH — Antes de qualquer contato</h3>
+    <p>10 minutos de pesquisa valem mais que 10 horas de follow up. Mapeie antes de abrir a boca.</p>
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Dimensão</th>
+            <th>O que mapear</th>
+            <th>Onde encontrar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Current State</td>
+            <td>Processo/ferramenta atual, tamanho da operação, estrutura do time</td>
+            <td>LinkedIn, site, vagas abertas (revelam prioridades)</td>
+          </tr>
+          <tr>
+            <td>Problemas Prováveis</td>
+            <td>O que empresas desse porte/segmento tipicamente sofrem</td>
+            <td>Reviews no G2/Capterra dos concorrentes deles</td>
+          </tr>
+          <tr>
+            <td>Business Impact</td>
+            <td>Custo provável do problema atual (receita, tempo, risco)</td>
+            <td>Relatórios do setor, benchmarks públicos</td>
+          </tr>
+          <tr>
+            <td>Trigger Events</td>
+            <td>Crescimento, novo cargo, funding, expansão, sazonalidade</td>
+            <td>LinkedIn News, Crunchbase, press releases</td>
+          </tr>
+          <tr>
+            <td>Stakeholders</td>
+            <td>Quem decide, influencia e bloqueia</td>
+            <td>LinkedIn org chart, perfis do time</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- FRAMEWORKS DE ABERTURA -->
+  <div class="grid-2">
+
+    <!-- Abertura por Insight -->
+    <div class="card">
+      <h3><span class="icon purple">AI</span>ABERTURA POR INSIGHT</h3>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Challenger Sale — "Lead with Insight". Inverta o poder: você não pede tempo, você traz valor.</p>
+      <h4>Estrutura</h4>
+      <div class="code-block"><span class="hl">"Empresas de [segmento] com [característica]</span>
+geralmente enfrentam <span class="hl2">[problema específico]</span> —
+e a maioria só descobre quando <span class="hl3">[consequência]</span>.
+
+Tenho curiosidade: <span class="hl">como vocês estão
+lidando com isso hoje?"</span></div>
+      <h4>Exemplo Real — SaaS B2B</h4>
+      <div class="code-block"><span class="comment">// Time de vendas &gt; 10 pessoas</span>
+"Empresas de SaaS com times acima de 10 reps
+perdem 20–30% do pipeline por falta de
+padronização na qualificação — só percebem
+quando o forecast começa a falhar.
+
+Como vocês estão estruturando a qualificação?"</div>
+    </div>
+
+    <!-- Abertura por Problema Known -->
+    <div class="card">
+      <h3><span class="icon green">AP</span>ABERTURA POR PROBLEMA KNOWN</h3>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Gap Selling — use quando tem forte hipótese do problema baseada em pesquisa.</p>
+      <h4>Estrutura</h4>
+      <div class="code-block"><span class="hl">"Estou conversando com [perfil]</span>
+e percebo que <span class="hl2">[problema X]</span> é recorrente.
+
+Não sei se é o caso de vocês, mas quero
+entender se faz sentido explorar isso.
+
+<span class="hl">Posso te fazer algumas perguntas?"</span></div>
+      <h4>Por que funciona</h4>
+      <ul>
+        <li>Você não afirma o problema — você hipotetiza</li>
+        <li>Deixa o prospect confirmar ou corrigir</li>
+        <li>Pede permissão → reduz resistência</li>
+        <li>Demonstra que você fez a lição de casa</li>
+      </ul>
+    </div>
+
+    <!-- Cold Outreach -->
+    <div class="card">
+      <h3><span class="icon orange">CO</span>COLD OUTREACH — E-mail / LinkedIn</h3>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Assunto = problema. Nunca produto. Taxa de abertura 3× maior.</p>
+      <h4>Template Cold Email</h4>
+      <div class="template-card">
+        <div class="t-header"><span class="t-dot"></span>E-mail — Cold Outreach</div>
+        <div class="t-body"><span class="subj">Assunto: [Nome da empresa] + [problema observado]</span>
+
+<span class="placeholder">[Nome]</span>, notei que <span class="placeholder">[trigger event observado]</span>.
+
+Empresas nessa fase geralmente enfrentam
+<span class="placeholder">[problema específico]</span>.
+
+Resolvi isso com <span class="placeholder">[empresa similar do segmento]</span>.
+
+Faz sentido uma conversa de 15 min?</div>
+      </div>
+    </div>
+
+    <!-- Erros Fatais -->
+    <div class="card">
+      <h3><span class="icon red">ER</span>ERROS FATAIS NA ABERTURA</h3>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:12px;">Cada um desses mata a venda antes de começar.</p>
+      <div style="overflow-x:auto;">
+        <table class="data-table">
+          <thead><tr><th>Erro</th><th>Por que mata</th></tr></thead>
+          <tbody>
+            <tr><td>Pitch de produto logo de cara</td><td>Você perde credibilidade e controle da conversa</td></tr>
+            <tr><td>"Como você está?" no cold</td><td>Sinaliza que você não tem propósito claro</td></tr>
+            <tr><td>Falar mais que o prospect nos primeiros 5 min</td><td>Você não aprende nada e ele não se envolve</td></tr>
+            <tr><td>Agendar "só para apresentar a empresa"</td><td>Prospect não tem motivo para aparecer</td></tr>
+            <tr><td>Features sem problema mapeado</td><td>Feature sem contexto não tem valor nenhum</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- QUOTE 2 — ABERTURA -->
+  <div class="quote-block">
+    <p>"Vendas curam tudo. Se você tem um ótimo produto e ninguém sabe disso, ele não vale nada. Aprenda a vender, ou contrate quem sabe. É a habilidade mais importante nos negócios."</p>
+    <div class="quote-author">
+      <div class="quote-avatar blue">MC</div>
+      <div class="quote-meta">
+        <strong>Mark Cuban</strong>
+        <span>Bilionário · Dono do Dallas Mavericks · Investidor Shark Tank</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="card">
+    <h3><span class="icon green">CK</span>CHECKLIST DE ABERTURA</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Pesquisa de 10 min feita antes da call — current state hipotético documentado</li>
+      <li><span class="check-icon"></span>Trigger event identificado (funding, crescimento, nova vaga, mudança de cargo)</li>
+      <li><span class="check-icon"></span>Abertura por insight preparada — nenhum pitch de produto no script</li>
+      <li><span class="check-icon"></span>Hipótese de problema formulada com base em dados, não em suposição</li>
+      <li><span class="check-icon"></span>Pergunta aberta para puxar o prospect preparada</li>
+      <li><span class="check-icon"></span>Agenda da conversa compartilhada verbalmente nos primeiros 60 segundos</li>
+    </ul>
+  </div>
+
+</div><!-- /abertura -->
+
+
+<!-- ══════════════════════════════════════════════
+     MÓDULO 2 — INVESTIGAÇÃO
+══════════════════════════════════════════════ -->
+<div class="tab-panel panel-investigacao" id="tab-investigacao">
+
+  <div class="section-hero">
+    <div class="module-tag">Módulo 02</div>
+    <h2>Investigação</h2>
+    <p>Diagnóstico sem pressa. Mapear o gap com precisão é mais valioso que qualquer demo. Quem faz as perguntas controla a conversa.</p>
+    <div class="principle-box">
+      "Sem problema quantificado não existe venda consultiva — existe apenas persuasão de curto prazo." — SPIN Selling, Neil Rackham
+    </div>
+  </div>
+
+  <!-- QUOTE — INVESTIGAÇÃO -->
+  <div class="quote-block">
+    <p>"Em vendas, quem fala mais perde. Perguntas são a ferramenta mais poderosa que você tem. Elas fazem o prospect se vender sozinho."</p>
+    <div class="quote-author">
+      <div class="quote-avatar green">NR</div>
+      <div class="quote-meta">
+        <strong>Neil Rackham</strong>
+        <span>Autor de SPIN Selling · Pesquisador de Comportamento em Vendas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAP DIAGRAM -->
+  <div class="gap-diagram">
+    <p style="font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-bottom:20px;">O Mapa do Gap — Framework Central</p>
+    <div class="gap-row">
+      <div class="gap-box current">
+        <div class="label">Current State</div>
+        <div class="title">Onde ele está</div>
+        <div class="sub">Processo · Problema · Impacto · Causa</div>
+      </div>
+      <div class="gap-arrow">
+        <div class="gap-label">O GAP</div>
+        <div class="arrow-line">
+          <div class="line"></div>
+          <div class="arrowhead">▶</div>
+        </div>
+        <div class="gap-desc">O que você vende<br/>(o caminho entre os dois estados)</div>
+      </div>
+      <div class="gap-box future">
+        <div class="label">Future State</div>
+        <div class="title">Onde quer chegar</div>
+        <div class="sub">Resultado · Métrica · Prazo · Visão</div>
+      </div>
+    </div>
+    <p style="font-size:12px; color:var(--muted); margin-top:16px;">O prospect não compra seu produto. Ele compra a distância entre esses dois estados.</p>
+  </div>
+
+  <!-- 4 CAMADAS -->
+  <div class="card">
+    <h3><span class="icon blue">4C</span>AS 4 CAMADAS DA INVESTIGAÇÃO (SPIN + Gap Selling)</h3>
+
+    <div class="grid-2" style="margin-top:16px;">
+      <div>
+        <h4>CAMADA 1 — Situação</h4>
+        <p>Contexto sem interrogatório. Máximo 3 perguntas.</p>
+        <div class="code-block"><span class="hl">"Como está organizado o processo de
+[área] hoje?"
+
+"Qual ferramenta/método vocês usam
+para [tarefa]?"
+
+"Quanto tempo/$ investem nisso/mês?"</span></div>
+        <p style="font-size:12px; color:var(--accent4);">⚠ Não exagere — muita situação = interrogatório</p>
+      </div>
+      <div>
+        <h4>CAMADA 2 — Problema</h4>
+        <p>Identifique a dor real, não a superficial. Use drill-down.</p>
+        <div class="code-block"><span class="hl2">"O que não está funcionando bem
+nesse processo hoje?"
+
+"O que te faz perder mais
+tempo/dinheiro nessa área?"
+
+"Se pudesse mudar uma coisa
+agora, o que seria?"</span></div>
+      </div>
+      <div>
+        <h4>CAMADA 3 — Implicação ⚡</h4>
+        <p>A camada mais poderosa. Amplifique o custo do problema.</p>
+        <div class="code-block"><span class="hl3">"Qual o impacto disso no resultado
+do trimestre?"
+
+"Se esse problema persistir por
+12 meses, o que acontece?"
+
+"Você consegue estimar quanto isso
+custa por mês?"</span></div>
+        <p style="font-size:12px; color:var(--accent3);">Meta: custo do problema &gt; custo da solução</p>
+      </div>
+      <div>
+        <h4>CAMADA 4 — Visão de Solução</h4>
+        <p>Faça o prospect articular o valor com as próprias palavras.</p>
+        <div class="code-block"><span class="hl">"Se você resolvesse isso, como
+seria diferente?"
+
+"Qual resultado você precisaria
+ver em 90 dias pra chamar de
+sucesso?"
+
+"Quanto isso representaria se
+funcionasse como você imagina?"</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TÉCNICAS AVANÇADAS -->
+  <div class="card">
+    <h3><span class="icon purple">TA</span>TÉCNICAS AVANÇADAS — Never Split the Difference (Voss)</h3>
+    <div class="grid-3">
+      <div>
+        <h4>Silêncio Calculado</h4>
+        <p>Após uma pergunta poderosa, cale-se. Conte mentalmente até 7. O desconforto faz o prospect preencher o vazio com a verdade.</p>
+        <div class="code-block"><span class="comment">// Faça a pergunta.</span>
+<span class="comment">// Pare. Conte 7.</span>
+<span class="comment">// Não preencha o silêncio.</span>
+<span class="hl2">O prospect sempre fala.</span></div>
+      </div>
+      <div>
+        <h4>Espelho (Mirroring)</h4>
+        <p>Repita as últimas 2-3 palavras como pergunta. O prospect elabora automaticamente sem sentir pressão.</p>
+        <div class="code-block">Prospect: <span class="hl3">"Temos dificuldade
+com retenção do time."</span>
+
+Você: <span class="hl2">"...retenção do time?"</span>
+
+<span class="comment">// Prospect explica mais</span></div>
+      </div>
+      <div>
+        <h4>Rotulagem (Labeling)</h4>
+        <p>Nomeie a emoção que você percebe. Cria empatia profunda e abre o prospect para revelar mais.</p>
+        <div class="code-block"><span class="hl">"Parece que isso está gerando
+bastante pressão no time."</span>
+
+<span class="hl">"Dá impressão que vocês já
+tentaram resolver isso e
+não funcionou."</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE 2 — INVESTIGAÇÃO -->
+  <div class="quote-block">
+    <p>"Os melhores vendedores não apenas resolvem problemas — eles ensinam os clientes a enxergar seus problemas de uma forma completamente diferente. Insight transforma a conversa."</p>
+    <div class="quote-author">
+      <div class="quote-avatar purple">MD</div>
+      <div class="quote-meta">
+        <strong>Matthew Dixon</strong>
+        <span>Co-autor de The Challenger Sale · Managing Director Korn Ferry</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEDDPICC -->
+  <div class="card">
+    <h3><span class="icon orange">MP</span>MEDDPICC — Qualificação de Oportunidade</h3>
+    <p style="margin-bottom:16px; font-size:14px; color:var(--muted);">Oportunidade sem Economic Buyer e sem dor quantificada não é oportunidade — é curiosidade.</p>
+    <div class="meddpicc-grid">
+      <div class="medd-card">
+        <div class="medd-letter">M</div>
+        <div class="medd-title">Metrics</div>
+        <div class="medd-q">"Que resultado mensurável você espera com isso?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">E</div>
+        <div class="medd-title">Economic Buyer</div>
+        <div class="medd-q">"Quem além de você precisa aprovar esse investimento?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">D</div>
+        <div class="medd-title">Decision Criteria</div>
+        <div class="medd-q">"Como vocês vão avaliar as opções disponíveis?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">D</div>
+        <div class="medd-title">Decision Process</div>
+        <div class="medd-q">"Quais são os próximos passos internos para decidir?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">P</div>
+        <div class="medd-title">Paper Process</div>
+        <div class="medd-q">"Como funciona o processo de contrato e jurídico aqui?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">I</div>
+        <div class="medd-title">Identify Pain</div>
+        <div class="medd-q">"Qual o custo de não resolver isso nos próximos 12 meses?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">C</div>
+        <div class="medd-title">Champion</div>
+        <div class="medd-q">"Quem mais se beneficia internamente com isso resolvido?"</div>
+      </div>
+      <div class="medd-card">
+        <div class="medd-letter">C</div>
+        <div class="medd-title">Competition</div>
+        <div class="medd-q">"Vocês estão avaliando outras soluções em paralelo?"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST INVESTIGAÇÃO -->
+  <div class="card">
+    <h3><span class="icon green">CK</span>CHECKLIST DE INVESTIGAÇÃO</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Current State mapeado — processo, ferramenta, tamanho da operação</li>
+      <li><span class="check-icon"></span>Problema real (não superficial) identificado via drill-down</li>
+      <li><span class="check-icon"></span>Impacto financeiro ou operacional quantificado em número</li>
+      <li><span class="check-icon"></span>Future State descrito com as palavras do próprio prospect</li>
+      <li><span class="check-icon"></span>Economic Buyer identificado pelo nome e cargo</li>
+      <li><span class="check-icon"></span>Processo de decisão mapeado — etapas, pessoas, prazo</li>
+      <li><span class="check-icon"></span>Champion identificado e sendo cultivado</li>
+      <li><span class="check-icon"></span>Competição mapeada — o que mais estão avaliando</li>
+      <li><span class="check-icon"></span>Prospect verbalizou o valor de resolver o problema</li>
+    </ul>
+  </div>
+
+</div><!-- /investigacao -->
+
+
+<!-- ══════════════════════════════════════════════
+     MÓDULO 3 — FECHAMENTO
+══════════════════════════════════════════════ -->
+<div class="tab-panel panel-fechamento" id="tab-fechamento">
+
+  <div class="section-hero">
+    <div class="module-tag">Módulo 03</div>
+    <h2>Fechamento</h2>
+    <p>O fechamento não é um momento mágico — é o resultado natural de uma investigação bem feita. Se precisar "fechar à força", o diagnóstico falhou.</p>
+    <div class="principle-box">
+      "Se você fez o trabalho certo nos módulos anteriores, o prospect está vendendo para si mesmo." — Keenan, Gap Selling
+    </div>
+  </div>
+
+  <!-- QUOTE — FECHAMENTO -->
+  <div class="quote-block">
+    <p>"Pare de tentar fechar a venda. Comece a abrir um relacionamento. O fechamento é o resultado natural de um processo bem conduzido — não uma técnica que você aplica no final."</p>
+    <div class="quote-author">
+      <div class="quote-avatar orange">K</div>
+      <div class="quote-meta">
+        <strong>Keenan</strong>
+        <span>CEO A Sales Guy · Autor de Gap Selling</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER / BRIDGE -->
+  <div class="card">
+    <h3><span class="icon blue">BB</span>APRESENTAÇÃO DA SOLUÇÃO — Before / After / Bridge</h3>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:16px;">Command of the Message (Force Management). Use as palavras do prospect — não as suas. Ele deve reconhecer a própria dor na sua apresentação.</p>
+    <div class="grid-3">
+      <div style="background:rgba(255,107,107,0.06); border:1px solid rgba(255,107,107,0.2); border-radius:10px; padding:18px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent4); margin-bottom:8px;">BEFORE — Current State</div>
+        <div class="code-block" style="background:transparent; border:none; padding:0; font-size:13px;">"Hoje vocês <span class="hl3">[current state nas palavras deles]</span>, o que gera <span class="hl3">[impacto que ele mesmo quantificou]</span>."</div>
+      </div>
+      <div style="background:rgba(0,201,167,0.06); border:1px solid rgba(0,201,167,0.2); border-radius:10px; padding:18px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent3); margin-bottom:8px;">AFTER — Future State</div>
+        <div class="code-block" style="background:transparent; border:none; padding:0; font-size:13px;">"Com <span class="hl2">[solução]</span>, vocês <span class="hl2">[resultado que ele articulou]</span>, o que significa <span class="hl2">[métrica de sucesso que ele mencionou]</span>."</div>
+      </div>
+      <div style="background:rgba(79,124,255,0.06); border:1px solid rgba(79,124,255,0.2); border-radius:10px; padding:18px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:8px;">BRIDGE — Como chegamos lá</div>
+        <div class="code-block" style="background:transparent; border:none; padding:0; font-size:13px;">"A forma como fazemos isso é <span class="hl">[mecanismo diferenciador]</span> — diferente de <span class="hl">[abordagem comum]</span>, porque <span class="hl">[razão única]</span>."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANEJO DE OBJEÇÕES -->
+  <div class="card">
+    <h3><span class="icon purple">MO</span>MANEJO DE OBJEÇÕES — Framework ACRA</h3>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:18px;">Não rebata. Explore. A objeção dita raramente é a objeção real.</p>
+    <div class="acra-row"><div class="acra-letter">A</div><div class="acra-content"><strong>Acknowledge — Valide sem ceder</strong><p>"Faz sentido você pensar nisso." / "Entendo completamente." — Nunca discuta, nunca ignore.</p></div></div>
+    <div class="acra-row"><div class="acra-letter">C</div><div class="acra-content"><strong>Clarify — Entenda a objeção real</strong><p>"O que especificamente te preocupa nisso?" + silêncio. A maioria das objeções esconde outra coisa.</p></div></div>
+    <div class="acra-row"><div class="acra-letter">R</div><div class="acra-content"><strong>Reframe — Mude o contexto</strong><p>"Se o ROI fosse claro em 60 dias, isso ainda seria um obstáculo?" — Coloque a objeção dentro do gap.</p></div></div>
+    <div class="acra-row"><div class="acra-letter">A</div><div class="acra-content"><strong>Advance — Próximo passo concreto</strong><p>"O que precisaríamos ver para avançar?" — Sempre termine com uma pergunta de comprometimento.</p></div></div>
+  </div>
+
+  <!-- OBJEÇÕES COMUNS -->
+  <div class="card">
+    <h3><span class="icon red">OC</span>OBJEÇÕES COMUNS + RESPOSTAS</h3>
+
+    <div class="objection-card">
+      <div class="obj-title">"É caro."</div>
+      <div class="obj-response">"Caro em relação a quê?" [silêncio de 7s]
+
+Se vs. problema:
+→ "Você mencionou que isso custa [X]/mês. Em 6 meses são [2-3× o preço].
+   Qual o custo de não resolver?"
+
+Se vs. concorrente:
+→ "O que a outra opção inclui que justifica a comparação direta?"</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-title">"Preciso pensar."</div>
+      <div class="obj-response">"Claro. O que especificamente você precisa processar?" [silêncio]
+
+→ Geralmente revela a objeção real que não foi dita.
+→ Se ele não consegue articular, o problema não está claro o suficiente — volte à investigação.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-title">"Não é prioridade agora."</div>
+      <div class="obj-response">"Entendo. O que está competindo por atenção?" [silêncio]
+
+"O problema que discutimos — você acha que ele
+vai se resolver sozinho nesse período?"
+
+→ Se a resposta for sim, o impacto não foi quantificado. Volte à Camada 3.</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-title">"Preciso consultar [pessoa X]."</div>
+      <div class="obj-response">"Faz todo sentido. O que você precisaria ter em mãos para apresentar isso internamente?"
+
+→ Ofereça: ROI deck, caso de cliente similar, executive summary.
+→ "Posso participar dessa reunião interna e responder direto às dúvidas deles?"</div>
+    </div>
+
+    <div class="objection-card">
+      <div class="obj-title">"Já temos uma solução."</div>
+      <div class="obj-response">"Que ótimo. O que está funcionando bem?" [ouça genuinamente]
+
+"E o que ainda não está resolvido nessa solução
+que fez você aceitar conversar comigo?"</div>
+    </div>
+
+  </div>
+
+  <!-- TÉCNICAS DE FECHAMENTO -->
+  <div class="card">
+    <h3><span class="icon green">TF</span>TÉCNICAS DE FECHAMENTO — Sem manipulação</h3>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Fechamento por Resumo de Valor</strong>
+          <p>"Vou resumir o que entendi: hoje vocês [current state], o que gera [impacto]. Você disse que o ideal seria [future state]. Nossa solução resolve exatamente isso via [mecanismo]. Faz sentido avançar para [próximo passo]?"</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Fechamento por Pergunta de Comprometimento</strong>
+          <p>"Se resolvermos [objeção/dúvida restante], você está confortável em avançar para [próximo passo específico]?"</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Fechamento por Próximo Passo Assumido</strong>
+          <p>Nunca pergunte "você quer avançar?" — pergunte QUANDO. "O próximo passo natural é [X]. Você prefere essa semana ou na próxima?"</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Fechamento por Urgência Real (só use se genuína)</strong>
+          <p>"Para estar operacional antes de [data relevante ao prospect], precisaríamos começar até [data]. Como está seu lado para isso?"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST FECHAMENTO -->
+  <div class="card">
+    <h3><span class="icon green">CK</span>CHECKLIST DE FECHAMENTO</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Solução apresentada usando linguagem do próprio prospect (Before/After/Bridge)</li>
+      <li><span class="check-icon"></span>ROI calculado, documentado e compartilhado antes da reunião de decisão</li>
+      <li><span class="check-icon"></span>Todas as objeções surfaçadas — nenhuma "escondida" por baixo do tapete</li>
+      <li><span class="check-icon"></span>Economic Buyer envolvido ou comprometido formalmente</li>
+      <li><span class="check-icon"></span>Próximo passo concreto com data e responsável definidos</li>
+      <li><span class="check-icon"></span>Proposta enviada ANTES da reunião de fechamento (nunca surpresa)</li>
+      <li><span class="check-icon"></span>Champion briefado com munição para defender internamente</li>
+    </ul>
+  </div>
+
+</div><!-- /fechamento -->
+
+
+<!-- ══════════════════════════════════════════════
+     MÓDULO 4 — FOLLOW UP
+══════════════════════════════════════════════ -->
+<div class="tab-panel panel-followup" id="tab-followup">
+
+  <div class="section-hero">
+    <div class="module-tag">Módulo 04</div>
+    <h2>Follow Up</h2>
+    <p>Follow up sem valor é spam com seu nome no assunto. Cada contato deve adicionar algo novo — dado, insight, caso, reflexão.</p>
+    <div class="principle-box">
+      "O momentum é o ativo mais valioso de um deal. Cada dia sem contato relevante você perde terreno para a inércia." — Fanatical Prospecting, Jeb Blount
+    </div>
+  </div>
+
+  <!-- QUOTE — FOLLOW UP -->
+  <div class="quote-block">
+    <p>"A fortuna está no follow up. A maioria dos vendedores desiste após o segundo contato. Mas 80% das vendas acontecem entre o quinto e o décimo segundo contato."</p>
+    <div class="quote-author">
+      <div class="quote-avatar red">JB</div>
+      <div class="quote-meta">
+        <strong>Jeb Blount</strong>
+        <span>CEO Sales Gravy · Autor de Fanatical Prospecting</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE 2 — FOLLOW UP -->
+  <div class="quote-block">
+    <p>"Vender não é mais sobre convencer. É sobre construir confiança e educar. Cada follow up é uma oportunidade de ser a pessoa mais valiosa naquela caixa de entrada."</p>
+    <div class="quote-author">
+      <div class="quote-avatar purple">CV</div>
+      <div class="quote-meta">
+        <strong>Chris Voss</strong>
+        <span>Ex-Negociador FBI · Autor de Never Split the Difference</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRINCÍPIOS -->
+  <div class="card">
+    <h3><span class="icon blue">5P</span>5 PRINCÍPIOS DO FOLLOW UP DE ALTO NÍVEL</h3>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Todo follow up precisa de um motivo além de "quero saber se decidiram"</strong>
+          <p>Dado novo, insight do setor, case relevante, artigo, reflexão sobre o problema que discutiram.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Defina o próximo passo ANTES de terminar cada interação</strong>
+          <p>Nunca termine uma call sem data, nome e ação definidos. "Vou te ligar semana que vem" não é próximo passo.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>O intervalo entre contatos diminui conforme o deal avança</strong>
+          <p>Quanto mais perto do fechamento, mais frequente. Não o contrário.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Varie o canal</strong>
+          <p>E-mail → ligação → LinkedIn → WhatsApp (se contexto permitir). Cada canal tem cadência diferente.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Nutra o Champion, não só o decisor</strong>
+          <p>O Champion vende por você quando você não está na sala. Ele precisa de munição.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CADÊNCIAS -->
+  <div class="grid-2">
+    <div class="card">
+      <h3><span class="icon blue">C1</span>CADÊNCIA — Pós Primeira Reunião</h3>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot">D0</div><div class="tl-content"><strong>Mesmo dia</strong><p>E-mail de recap com current state, impacto e próximo passo combinado</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D2</div><div class="tl-content"><strong>Dia 2</strong><p>Conteúdo relevante ao problema discutido — artigo, dado, benchmarck do setor</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D5</div><div class="tl-content"><strong>Dia 5</strong><p>Ligação ou mensagem com pergunta de avanço específica</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D10</div><div class="tl-content"><strong>Dia 10</strong><p>Caso de cliente com perfil similar — resultado concreto documentado</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D15</div><div class="tl-content"><strong>Dia 15</strong><p>Pergunta direta sobre próximo passo — sem rodeios</p></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3><span class="icon purple">C2</span>CADÊNCIA — Pós Proposta Enviada</h3>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot">D0</div><div class="tl-content"><strong>Envio da proposta</strong><p>Nunca "segue proposta". Contextualize: por que cada item está ali.</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D1</div><div class="tl-content"><strong>Confirmação</strong><p>Confirme recebimento + ofereça call de 20 min para dúvidas</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D3</div><div class="tl-content"><strong>Valor adicional</strong><p>ROI refinado, testemunho de cliente, dado novo relevante</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D7</div><div class="tl-content"><strong>Processo interno</strong><p>"Como está o processo de decisão aí? Posso ajudar em algo?"</p></div></div>
+        <div class="tl-item"><div class="tl-dot">D14</div><div class="tl-content"><strong>Economic Buyer</strong><p>Conversa direta com EB ou ativação do Champion com deck executivo</p></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEMPLATES -->
+  <div class="card">
+    <h3><span class="icon orange">TP</span>TEMPLATES DE FOLLOW UP</h3>
+
+    <h4>Template 1 — Recap Pós-Reunião (enviar no mesmo dia)</h4>
+    <div class="template-card">
+      <div class="t-header"><span class="t-dot"></span>E-mail — Recap + Próximos Passos</div>
+      <div class="t-body"><span class="subj">Assunto: Resumo + próximos passos — [Nome da empresa]</span>
+
+<span class="placeholder">[Nome]</span>,
+
+Ótima conversa hoje. Resumo do que discutimos:
+
+<span class="emphasis">SITUAÇÃO ATUAL:</span>
+• <span class="placeholder">[Current state com as palavras deles]</span>
+• Impacto identificado: <span class="placeholder">[número ou descrição do impacto]</span>
+
+<span class="emphasis">O QUE FARIA DIFERENÇA:</span>
+• <span class="placeholder">[Future state que eles descreveram]</span>
+
+<span class="emphasis">PRÓXIMO PASSO COMBINADO:</span>
+• <span class="placeholder">[Ação específica + data + responsável]</span>
+
+Qualquer dúvida antes disso, estou à disposição.</div>
+    </div>
+
+    <h4 style="margin-top:20px;">Template 2 — Follow Up com Insight</h4>
+    <div class="template-card">
+      <div class="t-header"><span class="t-dot"></span>E-mail — Valor Adicionado</div>
+      <div class="t-body"><span class="subj">Assunto: Algo relevante para o que discutimos</span>
+
+<span class="placeholder">[Nome]</span>,
+
+Lembrei da conversa sobre <span class="placeholder">[problema específico]</span>
+e encontrei <span class="placeholder">[dado/estudo/caso]</span> diretamente aplicável.
+
+<span class="placeholder">[1-2 linhas do insight + link]</span>
+
+Isso muda alguma coisa na forma como vocês
+estão pensando sobre isso?</div>
+    </div>
+
+    <h4 style="margin-top:20px;">Template 3 — Break-Up Email (maior taxa de resposta)</h4>
+    <div class="template-card">
+      <div class="t-header"><span class="t-dot"></span>E-mail — Break-Up (após silêncio prolongado)</div>
+      <div class="t-body"><span class="subj">Assunto: Fechando o loop — [Nome da empresa]</span>
+
+<span class="placeholder">[Nome]</span>,
+
+Tentei contato algumas vezes sem retorno,
+então vou assumir que <span class="placeholder">[o problema discutido]</span>
+não é mais prioridade — e isso faz total sentido.
+
+Vou fechar esse acompanhamento por aqui.
+
+Se algo mudar, pode me chamar.
+
+<span class="comment">// Por que funciona: remove a pressão.
+// O prospect se sente no controle e
+// frequentemente responde para explicar
+// a situação real.</span></div>
+    </div>
+
+    <h4 style="margin-top:20px;">Template 4 — Reaquecimento (prospect frio +30 dias)</h4>
+    <div class="template-card">
+      <div class="t-header"><span class="t-dot"></span>E-mail — Reaquecimento por Trigger</div>
+      <div class="t-body"><span class="subj">Assunto: [Trigger event] — fez sentido lembrar de você</span>
+
+<span class="placeholder">[Nome]</span>,
+
+Vi que <span class="placeholder">[trigger event: funding, crescimento, nova vaga, notícia]</span>.
+
+Quando conversamos em <span class="placeholder">[mês]</span>, você mencionou
+<span class="placeholder">[problema X]</span>. Imagino que com
+<span class="placeholder">[trigger event]</span>, isso ganhou ainda mais peso.
+
+Faz sentido retomar a conversa?</div>
+    </div>
+  </div>
+
+  <!-- CHAMPION NURTURING -->
+  <div class="card">
+    <h3><span class="icon green">CH</span>CHAMPION NURTURING — Equipando seu aliado interno</h3>
+    <p style="font-size:14px; color:var(--muted); margin-bottom:16px;">O Champion vende por você quando você não está na sala. Ele precisa de munição, não de esperança.</p>
+    <div class="grid-2">
+      <div>
+        <h4>O que fornecer ao Champion</h4>
+        <ul>
+          <li>ROI calculado em formato apresentável para o board</li>
+          <li>Casos de empresas que o Economic Buyer respeita</li>
+          <li>Respostas prontas para objeções que vão surgir</li>
+          <li>Executive summary de 1 página (não deck de 40 slides)</li>
+          <li>Oferta para participar da reunião interna de decisão</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Mensagem de Ativação do Champion</h4>
+        <div class="code-block"><span class="hl">"[Nome], quando você apresentar isso
+internamente, a principal objeção
+provavelmente vai ser [X]."</span>
+
+<span class="hl2">"Aqui está como eu responderia isso —
+te ajuda ter isso em mãos antes
+da reunião?"</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SINAIS DE COMPRA -->
+  <div class="card">
+    <h3><span class="icon orange">SC</span>SINAIS DE COMPRA — Reconheça e avance imediatamente</h3>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:8px;">
+      <div class="signal-row">
+        <div class="signal-trigger">Perguntas sobre implementação</div>
+        <div class="signal-action">Avance para próximo passo concreto imediatamente. Não deixe esfriar.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-trigger">Pedido de referências / cases</div>
+        <div class="signal-action">Forneça E pergunte: "O que você quer confirmar com eles?" — Revela a objeção escondida.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-trigger">Pergunta sobre preço / condições</div>
+        <div class="signal-action">Não recue — explore: "O que tornaria isso viável para vocês?"</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-trigger">Nova pessoa incluída na conversa</div>
+        <div class="signal-action">Mapeie imediatamente o papel dela no processo de decisão. Pode ser o bloqueador.</div>
+      </div>
+      <div class="signal-row">
+        <div class="signal-trigger">Pedido de proposta formal</div>
+        <div class="signal-action">Antes de enviar: "Se a proposta refletir o que discutimos, vocês estão prontos para avançar?"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST FOLLOW UP -->
+  <div class="card">
+    <h3><span class="icon green">CK</span>CHECKLIST DE FOLLOW UP</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span>Próximo passo definido na própria reunião — nunca improvisado depois</li>
+      <li><span class="check-icon"></span>Recap enviado no mesmo dia da reunião</li>
+      <li><span class="check-icon"></span>Cada follow up tem motivo claro além de "verificar status"</li>
+      <li><span class="check-icon"></span>Champion sendo nutrido com munição para defender internamente</li>
+      <li><span class="check-icon"></span>Cadência documentada no CRM com datas e responsáveis</li>
+      <li><span class="check-icon"></span>Sinais de compra sendo monitorados ativamente</li>
+      <li><span class="check-icon"></span>Break-up email preparado para deals parados +21 dias sem resposta</li>
+    </ul>
+  </div>
+
+  <!-- REFERENCES -->
+  <hr class="divider" />
+  <div class="card">
+    <h3><span class="icon blue">RF</span>REFERÊNCIAS — Base Metodológica</h3>
+    <div class="ref-grid">
+      <div class="ref-card"><div class="ref-num">1</div><div class="ref-info"><strong>Gap Selling</strong><span>Keenan (Jim Keenan)</span><p>Framework central: Current State → Future State → Gap. A base de todo este playbook.</p></div></div>
+      <div class="ref-card"><div class="ref-num">2</div><div class="ref-info"><strong>SPIN Selling</strong><span>Neil Rackham</span><p>Estrutura das 4 camadas de investigação (Situação, Problema, Implicação, Need-Payoff).</p></div></div>
+      <div class="ref-card"><div class="ref-num">3</div><div class="ref-info"><strong>The Challenger Sale</strong><span>Dixon & Adamson</span><p>Abertura por insight, teach-tailor-take control, reframe comercial.</p></div></div>
+      <div class="ref-card"><div class="ref-num">4</div><div class="ref-info"><strong>Never Split the Difference</strong><span>Chris Voss (ex-FBI)</span><p>Técnicas de comunicação: espelho, rotulagem, silêncio calculado, objeções.</p></div></div>
+      <div class="ref-card"><div class="ref-num">5</div><div class="ref-info"><strong>Command of the Message</strong><span>Force Management</span><p>Before/After/Bridge, linguagem de valor, alinhamento de solução ao problema.</p></div></div>
+      <div class="ref-card"><div class="ref-num">6</div><div class="ref-info"><strong>Fanatical Prospecting</strong><span>Jeb Blount</span><p>Cadência de prospecção, follow up disciplinado, momentum de pipeline.</p></div></div>
+      <div class="ref-card"><div class="ref-num">7</div><div class="ref-info"><strong>MEDDPICC</strong><span>Jack Napoli / PTC</span><p>Framework de qualificação de oportunidades complexas B2B.</p></div></div>
+      <div class="ref-card"><div class="ref-num">8</div><div class="ref-info"><strong>The Sales Acceleration Formula</strong><span>Mark Roberge (HubSpot)</span><p>Métricas, processo escalável, previsibilidade de receita.</p></div></div>
+    </div>
+  </div>
+
+</div><!-- /followup -->
+
+</main>
+
+<footer>
+  Playbook Comercial · Gap Selling Framework · Versão 1.0 · Abril 2026
+</footer>
+
+<script>
+  function moveIndicator(btn) {
+    const track = document.getElementById('navTrack');
+    const indicator = document.getElementById('navIndicator');
+    const trackRect = track.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    indicator.style.left = (btnRect.left - trackRect.left) + 'px';
+    indicator.style.width = btnRect.width + 'px';
+  }
+
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+    moveIndicator(btn);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Init indicator on first active button
+  window.addEventListener('load', () => {
+    const active = document.querySelector('.tab-btn.active');
+    if (active) moveIndicator(active);
+  });
+</script>
+
+<script>
+  // ── NETLIFY IDENTITY GATE ──
+  const appContent = document.querySelector('header, nav, main, footer');
+
+  function hideApp() {
+    document.querySelectorAll('header, nav, main, footer')
+      .forEach(el => el.style.display = 'none');
+  }
+
+  function showApp() {
+    document.querySelectorAll('header, nav, main, footer')
+      .forEach(el => el.style.display = '');
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) logoutBtn.style.display = 'flex';
+  }
+
+  // Esconde tudo até confirmar login
+  hideApp();
+
+  netlifyIdentity.on('init', user => {
+    if (!user) {
+      netlifyIdentity.open('login');
+    } else {
+      showApp();
+    }
+  });
+
+  netlifyIdentity.on('login', user => {
+    netlifyIdentity.close();
+    showApp();
+  });
+
+  netlifyIdentity.on('logout', () => {
+    hideApp();
+    netlifyIdentity.open('login');
+  });
+</script>
+
+<!-- BOTÃO LOGOUT -->
+<div id="logout-btn" style="
+  display: none;
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 999;
+">
+  <button onclick="netlifyIdentity.logout()" style="
+    background: #1c2030;
+    border: 1px solid #252a3a;
+    color: #7a8099;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  " onmouseover="this.style.color='#e8eaf0'" onmouseout="this.style.color='#7a8099'">
+    Sair
+  </button>
+</div>
+
+</body>
+</html>
