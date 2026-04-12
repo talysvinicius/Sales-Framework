@@ -1680,7 +1680,12 @@ da reunião?"</span></div>
 
   netlifyIdentity.on('init', user => {
     if (!user) {
-      netlifyIdentity.open('login');
+      // Se há token de convite ou recuperação na URL, deixa o widget lidar sozinho
+      const hash = window.location.hash;
+      const hasToken = hash.includes('invite_token') || hash.includes('recovery_token') || hash.includes('confirmation_token');
+      if (!hasToken) {
+        netlifyIdentity.open('login');
+      }
     } else {
       showApp();
     }
@@ -1688,6 +1693,8 @@ da reunião?"</span></div>
 
   netlifyIdentity.on('login', user => {
     netlifyIdentity.close();
+    // Limpa tokens da URL sem recarregar a página
+    history.replaceState(null, '', window.location.pathname);
     showApp();
   });
 
