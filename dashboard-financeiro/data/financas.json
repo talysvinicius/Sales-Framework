@@ -1,0 +1,17 @@
+{
+  "score": 450,
+  "meta_economia_mensal": 500,
+  "transactions": [],
+  "dividas": [
+    {"id": 1, "nome": "Mercado Pago (Serasa)", "total": 458.68, "pago": 0, "tipo": "Serasa", "prioridade": "alta"},
+    {"id": 2, "nome": "Realize/Renner", "total": 1277.00, "pago": 0, "tipo": "Serasa", "prioridade": "alta"},
+    {"id": 3, "nome": "Mercado Crédito (SCR)", "total": 1656.61, "pago": 0, "tipo": "SCR", "prioridade": "alta"},
+    {"id": 4, "nome": "Johnny", "total": 1500.00, "pago": 0, "tipo": "Amigo/Familiar", "prioridade": "alta"},
+    {"id": 5, "nome": "Pedro", "total": 5000.00, "pago": 0, "tipo": "Amigo/Familiar", "prioridade": "media"},
+    {"id": 6, "nome": "Gustavo", "total": 13000.00, "pago": 0, "tipo": "Amigo/Familiar", "prioridade": "media"},
+    {"id": 7, "nome": "MEI DAS atrasado", "total": 2088.00, "pago": 0, "tipo": "MEI/Imposto", "prioridade": "alta"}
+  ],
+  "metas": [
+    {"id": 1, "descricao": "Reserva emergência", "valor_alvo": 1000, "valor_atual": 0}
+  ]
+}
